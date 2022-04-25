@@ -7,9 +7,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const { name } = req.query;
-    // console.log('llega al get')
     const response = await getAllRecipes(name);
-    console.log(response)
     res.status(200).send(response);
   } catch (error) {
     console.error(error)

@@ -8,19 +8,15 @@ let apiData = [];
 
 const getApiData = async () => {
   try {
-    // console.log('este es apiData length', apiData.length)
-    // console.log('apikeys', API_KEY, API_KEY_1)
     if (apiData.length > 0) return apiData;
     const apiRecipes = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     );
-    // console.log('llega hasta aqui')
     if (apiRecipes.status !== 200) {
       apiRecipes = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_1}&addRecipeInformation=true&number=100`
       );
     }
-    // let apiData = [];
     apiRecipes.data.results.map((recipe) => {
       let newSteps = [];
       if (recipe.analyzedInstructions[0] !== undefined) {
@@ -57,7 +53,6 @@ const getApiData = async () => {
       };
       apiData.push(newRecipe);
     });
-    // console.log(apiData)
     return apiData;
   } catch (error) {
     console.error(error);
@@ -71,12 +66,24 @@ const getDBData = async () => {
       include: [
         {
           model: Cuisine,
+          attributes: ['cuisine'],
+          through: {
+            attributes: [],
+        },
         },
         {
           model: Diet,
+          attributes: ['diet_name'],
+          through: {
+            attributes: [],
+        },
         },
         {
           model: DishType,
+          attributes: ['dishType'],
+          through: {
+            attributes: [],
+        },
         },
       ],
     });
@@ -97,11 +104,9 @@ const getAllRecipes = async (name) => {
       : console.log("no hay datos de la Base aun");
 
     if (typeof name === "string" && name.length > 0) {
-      // console.log('llego el pedido por name ', name)
       let recipeToFind = allData.filter((recipe) => {
         return recipe.name.toLowerCase().includes(name.toLowerCase());
       });
-      // console.log(recipeToFind)
       if (recipeToFind) {
         return recipeToFind;
       } else {
@@ -110,7 +115,6 @@ const getAllRecipes = async (name) => {
         };
       }
     }
-    // console.log(allData[0])
     return allData;
   } catch (error) {
     return new Error(error);
@@ -124,31 +128,40 @@ const getRecipeById = async (id) => {
         include: [
           {
             model: Cuisine,
+            attributes: ['cuisine'],
+            through: {
+              attributes: [],
+          },
           },
           {
             model: Diet,
+            attributes: ['diet_name'],
+            through: {
+              attributes: [],
+          },
           },
           {
             model: DishType,
+            attributes: ['dishType'],
+            through: {
+              attributes: [],
+          },
           },
         ],
       });
       return recipeFind;
     } else {
-      // console.log('llega a buscar en axios el id', id)
       let recipeFind = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
       );
-      // if (recipeFind.status !== 200) {
-      //   recipeFind = await axios.get(
-      //     `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY_1}`
-      //   );
-      // }
-      // console.log(recipeFind.data)
+      if (recipeFind.status !== 200) {
+        recipeFind = await axios.get(
+          `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY_1}`
+        );
+      }
       let newSteps = [];
       if (recipeFind.data.analyzedInstructions[0] !== undefined) {
         let count = recipeFind.data.analyzedInstructions[0].steps.length;
-        // console.log('si encontro steps')
         for (let i = 0; i < count; i++) {
           let stepToAdd = {
             number: recipeFind.data.analyzedInstructions[0].steps[i].number,
@@ -157,14 +170,12 @@ const getRecipeById = async (id) => {
           newSteps.push(stepToAdd);
         }
       } else {
-        // console.log('no encontro steps')
         stepToAdd = {
           number: 1,
           step: "there is no steps listed for this recipe",
         };
         newSteps.push(stepToAdd);
       }
-      // console.log('estos son los steps', newSteps)
       let response = {
         id: recipeFind.data.id,
         name: recipeFind.data.title,
@@ -181,8 +192,6 @@ const getRecipeById = async (id) => {
         diets: recipeFind.data.diets,
         dbCreated: false,
       };
-
-      // console.log(response);
 
       return response;
     }

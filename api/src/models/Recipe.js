@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
         isUrl: true
       }
     },
-    vagetarian: {
+    vegetarian: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
