@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Cuisine, Diet, DishType } = require("../db");
 require("dotenv").config();
-const { API_KEY } = process.env;
+const { API_KEY, API_KEY_1 } = process.env;
 
 const getApiDataToDB = async () => {
   try {
@@ -15,12 +15,19 @@ const getApiDataToDB = async () => {
     if (Array.isArray(checkDishTypes) && checkDishTypes.length === 0)
       checkGeneral++;
     if (checkGeneral === 0)
-      return console.log("The database is up and ready to serve, whit no changes!!! ;)");
-    console.log("este es el check", checkGeneral);
+      return console.log(
+        "The database is up and ready to serve, whit no changes!!! ;)"
+      );
+    // console.log("este es el check", checkGeneral);
 
     const apiRecipes = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     );
+    if (apiRecipes.status !== 200) {
+      apiRecipes = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_1}&addRecipeInformation=true&number=100`
+      );
+    }
     // console.log('verifico apiRecipes', apiRecipes.data.results);
     console.log("verifico status", apiRecipes.status);
     console.log("verifico quota used", apiRecipes.headers["x-api-quota-used"]);

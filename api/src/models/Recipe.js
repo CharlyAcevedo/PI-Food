@@ -30,6 +30,18 @@ module.exports = (sequelize) => {
         isUrl: true
       }
     },
+    vagetarian: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    vegan: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    glutenFree: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     steps: {
       type: DataTypes.ARRAY(DataTypes.JSON),
     },
