@@ -1,10 +1,14 @@
-import './App.css';
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import Landing from "./vistas/landing.jsx";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Route exact path="/" component={Landing} />
+      </div>
+    </Router>
   );
 }
 

@@ -1,0 +1,8 @@
+
+export const GET_ALL_TYPES = 'GET_ALL_TYPES';
+export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
+export const FIND_RECIPE = 'FIND_RECIPE'
+export const GET_RECIPE_DETAILS = 'GET_RECIPE_DETAILS';
+export const FILTER_RECIPES = 'FILTER_RECIPES';
+export const ORDER_RECIPES = 'ORDER_RECIPES';
+export const CREATE_RECIPE = 'CREATE_RECIPE';
