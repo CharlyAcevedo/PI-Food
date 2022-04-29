@@ -1,0 +1,28 @@
+.recipe_card{
+    width: 20vw;
+    height: 35vh;
+    margin: auto;
+    padding: .2em .2em;
+    overflow: scroll;
+}
+
+.card_image{
+    width: 75%;
+    height: 60%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.card_name{
+    font-size: 1em;
+    font-weight: 600;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.card_diets{
+    font-size: .8em;
+    font-weight: 400;
+    padding-left: 2em;
+    padding-right: 2em;
+}

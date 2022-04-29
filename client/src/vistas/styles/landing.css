@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Updock&display=swap');
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+
+.landing_page{
+    display: flex;
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    color: #fdf4d9;
+    text-shadow: 2px 2px black;
+    background: #053045;
+    background: linear-gradient(45deg, #8a680cb0 0%, #cfbf2d99 44%, #8a680cb0 100%);
+ }
+
+ .container{
+    margin:auto;
+    width: 95%;
+    height: 95%;
+    background: url('../../asets/img/mesabebidas.gif') no-repeat center center;
+    background-size: cover;
+    box-shadow: 4px 4px 3px black;
+    border-radius: 15px;
+ }
+ 
+ .btn_w{
+    margin-top: 35vh;
+    margin-left: 2rem;
+    background-color: #eee6e673;
+    color: #615122;
+    font-family: 'Ms Madi', cursive;
+    font-size: 5vw;
+    text-shadow: 1px 1px 1px #173044;
+    box-shadow: 2px 2px 2px black;
+    border: none;
+    border-radius: 15px;
+    padding: .2rem .8rem .2rem .8rem;
+ }
+ 
+ .btn_w:hover{
+    background-color: #3b6587af;
+    box-shadow: 4px 4px 4px #133044;
+    color: #b7e9ef;
+    text-shadow: 2px 2px #133044
+ }
+ 
+ .title_app{
+    display: flex;
+    position: absolute;
+    color: #d4c081;
+    font-family: 'Ms Madi', cursive;
+    font-size: 6.5vw;
+    font-weight: 500;
+    top: 1em;
+    left: 1em;
+
+   -webkit-transform: rotate(-4deg); 
+   -moz-transform: rotate(-4deg); 
+   -ms-transform: rotate(-4deg); 
+   -o-transform: rotate(-4deg); 
+   transform: rotate(-4deg); 
+      
+   -webkit-transform-origin: 50% 50%; 
+   -moz-transform-origin: 50% 50%; 
+   -ms-transform-origin: 50% 50%; 
+   -o-transform-origin: 50% 50%; 
+   transform-origin: 50% 50%; 
+ }
+ 
+ .subtitle_app{
+    position: absolute;
+    bottom: 3.5em;
+    right: 2em;
+    padding: .5rem 1rem;
+    color: #50482f;
+    font-size: 1.5vw;
+    font-weight:500;
+    border: 1px #25252540;
+    text-shadow: 1px 1px 1px #3a3424;
+    box-shadow: 4px 4px 3px #173044;
+    background-color: #eee6e673;
+    width: fit-content;
+    border-radius: 20px;
+ }
+ 
+ .img_container{
+    width: 30vw;
+    height: 30vw;
+    margin-top: 28vh;
+    margin-left: 25%;
+ }
+ 
+ .world_image{
+    width: 30vw;
+    height: 30vw;
+ }
+ 
+ 

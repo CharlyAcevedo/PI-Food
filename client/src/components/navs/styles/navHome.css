@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Updock&display=swap');
+
+.nav_home{
+    position: fixed;
+    background: #d1bc8e;
+    background: linear-gradient(180deg, #d1bc8eed 0%, #f1dbac 44%, #d1bc8ee1 100%);
+    width: 100%;
+    height: 8vh;
+}
+
+.nav_logo{
+    position: absolute;
+    top: .2em;
+    left: .5em;
+    height: 7vh;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    border-radius: 40%;
+}
+
+.nav_title{
+    position: absolute;
+    top: 0;
+    right: .5em;
+    color: #41381c;
+    font-family: 'Ms Madi', cursive;
+    font-size: 1.5em;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px #41381c;
+}
+
+.links_container{
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 5em;
+    list-style: none;
+    line-height: 8vh;
+    width: 60%;
+    color: #41381c;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px #41381c;
+    transition: transform .5s;
+}
+
+.nav_list{
+    position: relative;
+    width: 25%;
+    height: 100%;
+    color: #41381c;
+    text-decoration: none;
+    transition: transform 0.5s;
+    background: linear-gradient(45deg, #d1bc8eed 0%, #f1dbac 44%, #d1bc8ee1 100%);
+    --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+    --transform: rotate(-90deg);
+}
+
+.nav_link{
+    text-decoration: none;
+    position: relative;
+    color: #41381c;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+}
+
+.nav_list:hover{    
+    --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    --transform: rotate(0deg);
+}
+
+.nav_list:hover{
+    background: linear-gradient(90deg, #cebd9aed 0%, #f7e7c5 44%, #cebd9aed 100%);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.menu_arrow{
+    transform: var(--transform);
+    transition: transform 0.5s;
+    margin-left: 3px;
+    color: #41381c;
+}
+
+.nav_nesting_menu{
+    list-style: none;
+    transition:clip-path .3s;
+    clip-path: var(--clip);
+    position: absolute;
+    right: 0;
+    background: linear-gradient(90deg, #cebd9aed 0%, #f7e7c5 44%, #cebd9aed 100%);
+    width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    
+}

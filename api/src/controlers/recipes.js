@@ -87,6 +87,7 @@ const getDBData = async () => {
         },
       ],
     });
+    
     return dbRecipes;
   } catch (error) {
     return new Error(error);

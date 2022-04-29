@@ -1,0 +1,21 @@
+{
+    "id": "DBC-01",
+    "name": "Sopa de fideos",
+    "summary": "Una rica sopa de fideos con caldo de pollo, fideos y verduras al gusto",
+    "score": 98.5,
+    "healthScore": 90.3,
+    "image": "https://i.ytimg.com/vi/R_aL4FWIBdI/maxresdefault.jpg",
+    "vegetarian": true,
+    "vegan": false,
+    "glutenFree": false,
+    "steps": [{
+        "number": 1,
+        "step": "poner 1 litro de agua a hervir, con un poco de aceite, caldo de pollo en polvo y sazonador al gusto"
+    },{
+        "number": 2,
+        "step": "En cuanto hierva incorporar los fideos y las verduras y esperar de 15 a 20 minutos a que se queden bien cocidos los fideos y las verduras"
+    }],
+    "cuisines": ["Mexican", "American"],
+    "dishTypes": ["lunch", "soup"],
+    "diets": ["dairy free","lacto ovo vegetarian", "primal"]
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_TYPES, GET_ALL_RECIPES } from './actionTypes';
+import { GET_ALL_TYPES, GET_ALL_RECIPES, RECIPES_ORDER_AND_FILTER } from './actionTypes';
 
 export function getAllTypes() {
     return async (dispatch) => {
@@ -35,3 +35,21 @@ export function getAllRecipes() {
         };
     }
 }
+
+export function recipesOrderAndFilter(payload) {
+    return (dispatch) => {
+        try {
+          dispatch({
+            type: RECIPES_ORDER_AND_FILTER,
+            payload: payload
+          })
+            
+        } catch (error) {
+            dispatch({
+                type: RECIPES_ORDER_AND_FILTER,
+                payload: { error: error.message }
+            });
+        };
+    };
+};
+

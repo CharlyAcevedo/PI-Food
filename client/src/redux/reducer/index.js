@@ -1,4 +1,9 @@
-import { GET_ALL_TYPES, GET_ALL_RECIPES } from "../actions/actionTypes";
+import { initialNormalize, filtersAndOrders } from './controlers'
+import {
+  GET_ALL_TYPES,
+  GET_ALL_RECIPES,
+  RECIPES_ORDER_AND_FILTER,
+} from "../actions/actionTypes";
 
 const initialState = {
   recipesToShow: [],
@@ -41,11 +46,39 @@ const rootReducer = (state = initialState, { type, payload }) => {
           errors: payload.error,
         };
       }
+      let recipesNormalized = initialNormalize(payload.data);
+      recipesNormalized = filtersAndOrders(
+        recipesNormalized,
+        state.currentFilter.prop,
+        state.currentFilter.value,
+        state.currentOrder.value,
+        state.currentOrder.prop
+      );
       return {
         ...state,
-        allRecipes: payload.data,
-        recipesToShow: payload.data
+        allRecipes: recipesNormalized,
+        recipesToShow: recipesNormalized,
       };
+      case RECIPES_ORDER_AND_FILTER:
+        let newOrderAndFilter = filtersAndOrders(
+          state.allRecipes, 
+          payload.field ? payload.field : state.currentFilter.prop,
+          payload.filter ? payload.filter : state.currentFilter.value,
+          payload.order ? payload.order : state.currentOrder.value,
+          payload.orderBy ? payload.orderBy : state.currentOrder.prop
+          );
+        return {
+          ...state,
+          recipesToShow: newOrderAndFilter,
+          currentOrder: {
+            prop: payload.orderBy ? payload.orderBy : state.currentOrder.prop,
+            value: payload.order ? payload.order : state.currentOrder.value
+          },
+          currentFilter: {
+            prop: payload.field ? payload.field : state.currentFilter.prop,
+            value: payload.filter ? payload.filter : state.currentFilter.value
+          }
+        };
     default:
       return state;
   }
