@@ -31,7 +31,7 @@ const getApiData = async () => {
       } else {
         stepToAdd = {
           number: 1,
-          step: "there is no steps listed for this recipe",
+          step: "there are no steps listed for this recipe",
         };
         newSteps.push(stepToAdd);
       }

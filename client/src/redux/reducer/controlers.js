@@ -34,7 +34,7 @@ export function initialNormalize(array) {
 
 export function filtersAndOrders(array, field = 'name', filter = 'all', order = 'ASC', orderBy = 'name') {
   let newArray = filter === 'all' ? array : array.filter((recipe) => {
-    return recipe[field].includes(filter);
+    return recipe[field] === 'name' ? recipe.name.toLowerCase().includes(filter.toLowerCase()) : recipe[field].includes(filter);
   });
   newArray =
     order === "ASC"

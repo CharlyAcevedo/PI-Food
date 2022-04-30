@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllTypes, recipesOrderAndFilter } from '../../redux/actions/'
+import { getAllTypes, recipesOrderAndFilter, searchRecipe } from '../../redux/actions/'
 import corazon from "../../asets/img/corazon.gif";
 import arrow from "../../asets/icons/arrow.svg";
+import search from '../../asets/icons/search.svg';
 import "./styles/navHome.css";
 
 export default function NavHome() {
@@ -19,6 +20,7 @@ export default function NavHome() {
   
   const [currentOrderLocale, setCurrentOrderLocale] = useState('ASC');
   const [currentOrderByLocale, setCurrentOrderByLocale] = useState('name');
+  const [currentSearch, setCurrentSearch] = useState('')
 
   useEffect(() => {
     dispatch(getAllTypes())
@@ -50,12 +52,20 @@ export default function NavHome() {
     dispatch(recipesOrderAndFilter(payload));
   };
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    if(e.target.value === '') {
+      setCurrentSearch(e.target.value)
+    } else {
+      setCurrentSearch(e.target.value)
+      dispatch(searchRecipe(e.target.value))
+    }
+  }
+
   return (
     <nav className="nav_home">
       <section className="nav_logo_container">
         <img src={corazon} alt="" className="nav_logo" />
-
-        <div className="nav_title">The International Cuisine's App</div>
         <ul className="links_container">
           <li className="nav_list">
             <Link className="nav_link" to="/home">
@@ -63,7 +73,7 @@ export default function NavHome() {
             </Link>
           </li>
           <li className="nav_list">
-            <Link className="nav_link">Create Recipe</Link>
+            <Link className="nav_link" to="/create_recipe">Create Recipe</Link>
           </li>
           <li className="nav_list nav_list--show">
             <p className="nav_link">
@@ -161,6 +171,8 @@ export default function NavHome() {
             </ul>
           </li>
         </ul>
+        <input onChange={(e) => handleChange(e)} className='nav_input' type="search" value={currentSearch}/>
+        <img className='img_search' src={search} alt='search' />       
       </section>
     </nav>
   );

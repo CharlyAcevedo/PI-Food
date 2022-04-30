@@ -3,10 +3,15 @@ import {
   GET_ALL_TYPES,
   GET_ALL_RECIPES,
   RECIPES_ORDER_AND_FILTER,
+  SET_CURRENT_PAGE,
+  SET_PAGE_NUMBER,
+  SEARCH_RECIPE,
+  GET_RECIPE_DETAILS
 } from "../actions/actionTypes";
 
 const initialState = {
   recipesToShow: [],
+  pageToShow: [],
   allRecipes: [],
   allDiets: [],
   allCuisines: [],
@@ -54,31 +59,107 @@ const rootReducer = (state = initialState, { type, payload }) => {
         state.currentOrder.value,
         state.currentOrder.prop
       );
+      const newPageRecipes2 = recipesNormalized.slice(0, 12);
       return {
         ...state,
         allRecipes: recipesNormalized,
         recipesToShow: recipesNormalized,
+        pageToShow: newPageRecipes2,
+        currentPage: 1,
       };
-      case RECIPES_ORDER_AND_FILTER:
-        let newOrderAndFilter = filtersAndOrders(
-          state.allRecipes, 
-          payload.field ? payload.field : state.currentFilter.prop,
-          payload.filter ? payload.filter : state.currentFilter.value,
-          payload.order ? payload.order : state.currentOrder.value,
-          payload.orderBy ? payload.orderBy : state.currentOrder.prop
-          );
+    case RECIPES_ORDER_AND_FILTER:
+      if (payload.error) {
         return {
           ...state,
-          recipesToShow: newOrderAndFilter,
-          currentOrder: {
-            prop: payload.orderBy ? payload.orderBy : state.currentOrder.prop,
-            value: payload.order ? payload.order : state.currentOrder.value
-          },
-          currentFilter: {
-            prop: payload.field ? payload.field : state.currentFilter.prop,
-            value: payload.filter ? payload.filter : state.currentFilter.value
-          }
+          errors: payload.error,
         };
+      }
+      let newOrderAndFilter = filtersAndOrders(
+        state.allRecipes,
+        payload.field ? payload.field : state.currentFilter.prop,
+        payload.filter ? payload.filter : state.currentFilter.value,
+        payload.order ? payload.order : state.currentOrder.value,
+        payload.orderBy ? payload.orderBy : state.currentOrder.prop
+      );
+      const newPageRecipes1 = newOrderAndFilter.slice(0, 12);
+      return {
+        ...state,
+        recipesToShow: newOrderAndFilter,
+        pageToShow: newPageRecipes1,
+        currentPage: 1,
+        currentOrder: {
+          prop: payload.orderBy ? payload.orderBy : state.currentOrder.prop,
+          value: payload.order ? payload.order : state.currentOrder.value,
+        },
+        currentFilter: {
+          prop: payload.field ? payload.field : state.currentFilter.prop,
+          value: payload.filter ? payload.filter : state.currentFilter.value,
+        },
+      };
+    case SET_CURRENT_PAGE:
+      if (payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      const newPageRecipes = state.recipesToShow.slice(payload.offset, payload.limit);
+      return {
+        ...state,
+        pageToShow: newPageRecipes,
+        currentPage: payload.currentPage
+      };
+    case SET_PAGE_NUMBER:
+      if (payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      return {
+        ...state,
+        currentPage: payload,
+      };
+    case SEARCH_RECIPE:
+      if (payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      let recipeFound = filtersAndOrders(
+        state.allRecipes,
+        'name',
+        payload ? payload : state.currentFilter.value,
+        'ASC',
+        'name'
+      );
+      const recipeFoundSlice = recipeFound.slice(0, 12);
+      return {
+        ...state,
+        recipesToShow: recipeFound,
+        pageToShow: recipeFoundSlice,
+        currentPage: 1,
+        currentOrder: {
+          prop: 'name',
+          value: 'ASC',
+        },
+        currentFilter: {
+          prop: 'name',
+          value: payload,
+        },
+      };
+    case GET_RECIPE_DETAILS:
+      if (payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      return {
+        ...state,
+        recipeDetails: payload
+      }
     default:
       return state;
   }
