@@ -7,6 +7,8 @@ import {
   SET_PAGE_NUMBER,
   SEARCH_RECIPE,
   GET_RECIPE_DETAILS,
+  CREATE_RECIPE,
+  SET_CURRENT_LIMIT,
 } from "./actionTypes";
 
 export function getAllTypes() {
@@ -91,6 +93,22 @@ export function setPageNumber(payload) {
   };
 };
 
+export function setCurrentLimit(payload) {
+  return (dispatch) => {
+    try {
+      dispatch({
+        type: SET_CURRENT_LIMIT,
+        payload: payload,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_CURRENT_LIMIT,
+        payload: { error: error.message },
+      });
+    };
+  };
+};
+
 export function searchRecipe(payload) {
   return (dispatch) => {
     try {
@@ -123,3 +141,36 @@ export function getRecipeDetail(payload) {
     };
   };
 };
+
+// export function createRecipe(payload){
+//   return async (dispatch) => {
+//     try {
+//       console.log('este es el payload', payload)
+//       await axios.post("/recipe", payload).then((response) => {
+//         console.log(response)
+//         dispatch({
+//           type: CREATE_RECIPE,
+//           payload: response
+//         });
+//       });
+//     } catch (error) {
+//       dispatch({
+//         type: CREATE_RECIPE,
+//         payload: { error: error.message },
+//       });
+//     };
+//   };
+// };
+
+export const createRecipe = (payload) => () => {
+  return fetch("http://localhost:3001/recipe", {
+      method: "POST",
+      headers: {
+          accept: "application/json",
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload),
+  }).then((response) =>
+    console.log(response)
+  )
+}

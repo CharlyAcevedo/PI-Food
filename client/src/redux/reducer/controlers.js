@@ -7,7 +7,7 @@ export function initialNormalize(array) {
       for(let i = 0; i < count; i++){
         newDiets.push(recipe.diets[i].diet_name)
       }
-      recipe.diets = newDiets
+      recipe.diets = newDiets 
     }
     if(typeof recipe.cuisines[0] !== 'string'){
       let newCuisines = [];

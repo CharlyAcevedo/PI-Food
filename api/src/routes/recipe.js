@@ -4,6 +4,10 @@ const { Recipe, Diet, Cuisine, DishType } = require("../db");
 
 const router = Router();
 
+router.get("/|", (req, res) => {
+  res.send('si llega a la ruta')
+})
+
 router.post("/", async (req, res) => {
   const {
     id,

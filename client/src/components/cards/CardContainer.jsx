@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRecipes, recipesOrderAndFilter } from "../../redux/actions";
 import RecipeCard from "./recipeCard";
-import loading from "../../asets/img/loadin.png"
+import backImg from "../../asets/img/sirvecerveza.gif"
+import loading from "../../asets/img/ensaladaprepara.gif"
 import './styles/cardcontainer.css'
 import { Link } from "react-router-dom";
 
@@ -42,11 +43,12 @@ export default function CardContainer() {
   return (
     <div>
       <div className="main_title">The International Cuisine's App</div>
+      <img className="back_image" src={backImg} alt="Sirve cerveza" />
       <div className="card_container">
         {recipesToShow.length ?
           recipesToShow.map((recipe) => {
             return (
-              <div key={recipe.id}>
+              <div className="cards" key={recipe.id}>
                 <Link className="card_link" to={`/details/${recipe.id}`} >
                 <RecipeCard
                   key={recipe.id}

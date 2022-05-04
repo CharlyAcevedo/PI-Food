@@ -6,7 +6,9 @@ import {
   SET_CURRENT_PAGE,
   SET_PAGE_NUMBER,
   SEARCH_RECIPE,
-  GET_RECIPE_DETAILS
+  GET_RECIPE_DETAILS,
+  CREATE_RECIPE,
+  SET_CURRENT_LIMIT,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -25,7 +27,9 @@ const initialState = {
     prop: "name",
     value: "ASC",
   },
+  currentLimit: 9,
   currentPage: 1,
+  created: "",
   errors: "",
 };
 
@@ -59,7 +63,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         state.currentOrder.value,
         state.currentOrder.prop
       );
-      const newPageRecipes2 = recipesNormalized.slice(0, 12);
+      const newPageRecipes2 = recipesNormalized.slice(0, state.currentLimit);
       return {
         ...state,
         allRecipes: recipesNormalized,
@@ -81,7 +85,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         payload.order ? payload.order : state.currentOrder.value,
         payload.orderBy ? payload.orderBy : state.currentOrder.prop
       );
-      const newPageRecipes1 = newOrderAndFilter.slice(0, 12);
+      const newPageRecipes1 = newOrderAndFilter.slice(0, state.currentLimit);
       return {
         ...state,
         recipesToShow: newOrderAndFilter,
@@ -120,6 +124,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         currentPage: payload,
       };
+      case SET_CURRENT_LIMIT:
+        if (payload.error) {
+          return {
+            ...state,
+            errors: payload.error,
+          };
+        };
+        return {
+          ...state,
+          currentLimit: payload,
+        };
     case SEARCH_RECIPE:
       if (payload.error) {
         return {
@@ -134,7 +149,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         'ASC',
         'name'
       );
-      const recipeFoundSlice = recipeFound.slice(0, 12);
+      const recipeFoundSlice = recipeFound.slice(0, state.currentLimit);
       return {
         ...state,
         recipesToShow: recipeFound,
@@ -156,9 +171,29 @@ const rootReducer = (state = initialState, { type, payload }) => {
           errors: payload.error,
         };
       };
+      let idTest = /^DBC-[0-9]/
+      if (typeof payload.id === "string" && idTest.test(payload.id)){
+        let normalizedRecipe = [payload];
+        normalizedRecipe = initialNormalize(normalizedRecipe)
+        return {
+          ...state,
+          recipeDetails: normalizedRecipe[0]
+        };
+      };
       return {
         ...state,
         recipeDetails: payload
+      };
+    case CREATE_RECIPE:
+      if (payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      return {
+        ...state,
+        created: payload
       }
     default:
       return state;

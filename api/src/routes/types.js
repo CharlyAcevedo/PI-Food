@@ -11,7 +11,6 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const response = await getAllTypes();
-    console.log(response)
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send({ error: error.message });

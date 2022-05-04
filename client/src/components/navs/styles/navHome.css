@@ -99,7 +99,11 @@
     top: 1em;
     right: 2em;
     width: 2%;
-    height: 3.5vh;
+    height: 4vh;
+    padding-left: .3em;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: inset;
 }
 
 .nav_input:hover{

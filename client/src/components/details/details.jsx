@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import loading from "../../asets/img/loadin.png";
+import ensaladaprepara from '../../asets/img/ensaladaprepara.gif'
 import batehuevo from "../../asets/img/batehuevo.gif";
 import "./styles/details.css";
 
@@ -82,7 +82,7 @@ export default function Details() {
           </div>
         </>
       ) : (
-        <img src={loading} alt="loading..." />
+        <img src={ensaladaprepara} alt="loading..." />
       )}
     </div>
   );

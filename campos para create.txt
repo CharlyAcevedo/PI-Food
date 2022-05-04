@@ -1,0 +1,16 @@
+
+{
+    id,
+    name,
+    summary,
+    score,
+    healthScore,
+    image,
+    vegetarian,
+    vegan,
+    glutenFree,
+    steps,
+    cuisines,
+    dishTypes,
+    diets,
+  }

@@ -1,0 +1,24 @@
+.form_page_container{
+    padding-top: 10vh;
+}
+
+.back_image{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.form_container{
+    position: relative;
+    background-color: #faebd7b6;
+    margin: auto;
+    width: 95%;
+    height: 87vh;
+    padding: .3em .3em;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px #41381c;
+    border-width: 8px;
+    border-style: ridge;
+}
