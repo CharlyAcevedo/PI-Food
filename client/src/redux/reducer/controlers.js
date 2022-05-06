@@ -32,29 +32,42 @@ export function initialNormalize(array) {
 
 
 
-export function filtersAndOrders(array, field = 'name', filter = 'all', order = 'ASC', orderBy = 'name') {
-  let newArray = filter === 'all' ? array : array.filter((recipe) => {
-    return recipe[field] === 'name' ? recipe.name.toLowerCase().includes(filter.toLowerCase()) : recipe[field].includes(filter);
-  });
+export function filtersAndOrders(
+  array,
+  field = "name",
+  filter = "all",
+  order = "ASC",
+  orderBy = "name"
+) {
+  let newArray =
+    filter === "all" || filter === ""
+      ? array
+      : field === "name"
+      ? array.filter((recipe) => {
+          return recipe.name.toLowerCase().includes(filter.toLowerCase());
+        })
+      : array.filter((recipe) => {
+          return recipe[field].includes(filter);
+        });
   newArray =
     order === "ASC"
       ? newArray.sort((a, b) => {
-          if (a[orderBy] > b[orderBy]) {
+          if (a[orderBy].toLowerCase() > b[orderBy].toLowerCase()) {
             return 1;
           }
-          if (a[orderBy] < b[orderBy]) {
+          if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) {
             return -1;
           }
           return 0;
         })
       : newArray.sort((a, b) => {
-          if (a[orderBy] < b[orderBy]) {
+          if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) {
             return 1;
           }
-          if (a[orderBy] > b[orderBy]) {
+          if (a[orderBy].toLowerCase > b[orderBy].toLowerCase()) {
             return -1;
           }
           return 0;
         });
-  return newArray
+  return newArray;
 }

@@ -1,7 +1,8 @@
 let regPhrase = /^[a-zA-Z0-9][a-zA-Z0-9]+\s[a-zA-Z0-9]+\s[a-zA-Z0-9]+/;
 let regWord = /^[a-zA-Z0-9]{2}[a-zA-Z0-9]*\s*\w*/;
-let regUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
+export const regUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 let regNum = /[0-9]/
+
 
 export function validateForm(prop, value) {
   if (prop === "name" && regWord.test(value)) {
@@ -41,3 +42,4 @@ export function testDisableSubmit(testObject) {
   if (testObject.diets.length > 0) return true;
   return false;
 }
+

@@ -142,35 +142,21 @@ export function getRecipeDetail(payload) {
   };
 };
 
-// export function createRecipe(payload){
-//   return async (dispatch) => {
-//     try {
-//       console.log('este es el payload', payload)
-//       await axios.post("/recipe", payload).then((response) => {
-//         console.log(response)
-//         dispatch({
-//           type: CREATE_RECIPE,
-//           payload: response
-//         });
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: CREATE_RECIPE,
-//         payload: { error: error.message },
-//       });
-//     };
-//   };
-// };
+export function createRecipe(payload){
+  return async (dispatch) => {
+    try {
+      await axios.post("/recipe", payload).then((response) => {
+        dispatch({
+          type: CREATE_RECIPE,
+          payload: response
+        });
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_RECIPE,
+        payload: { error: error.message },
+      });
+    };
+  };
+};
 
-export const createRecipe = (payload) => () => {
-  return fetch("http://localhost:3001/recipe", {
-      method: "POST",
-      headers: {
-          accept: "application/json",
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload),
-  }).then((response) =>
-    console.log(response)
-  )
-}

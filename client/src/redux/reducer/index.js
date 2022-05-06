@@ -193,7 +193,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
       return {
         ...state,
-        created: payload
+        created: payload.data
       }
     default:
       return state;

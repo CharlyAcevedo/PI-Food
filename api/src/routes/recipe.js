@@ -4,9 +4,6 @@ const { Recipe, Diet, Cuisine, DishType } = require("../db");
 
 const router = Router();
 
-router.get("/|", (req, res) => {
-  res.send('si llega a la ruta')
-})
 
 router.post("/", async (req, res) => {
   const {
@@ -24,6 +21,14 @@ router.post("/", async (req, res) => {
     dishTypes,
     diets,
   } = req.body;
+
+  const findEqual = await Recipe.findByPk(id)
+  console.log(findEqual)
+  if (findEqual) {
+    console.log('entro aqui')
+    res.status(400).send('That ID allready exist in DB')
+    return;
+  };
 
   const response = await createRecipe({
     id,
