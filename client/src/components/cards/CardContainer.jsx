@@ -14,16 +14,18 @@ export default function CardContainer() {
   const currentOrderState = useSelector((state) => state.currentOrder);
   const currentFilterState = useSelector((state) => state.currentFilter);
 
-  const [currentOrderLocale, setCurrentOrderLocale] = useState({
-    prop: "name",
-    value: "ASC",
-  });
-  const [currentFilterLocale, setCurrentFilterLocale] = useState({
-    prop: "name",
-    value: "all",
-  });
+  const [currentOrderLocale, setCurrentOrderLocale] = useState(currentOrderState);
+  const [currentFilterLocale, setCurrentFilterLocale] = useState(currentFilterState);
+  const [control, setControl] = useState(true)
 
   useEffect(() => {
+    // console.log('me llamo')
+    setControl(false)
+    dispatch(getAllRecipes()); // eslint-disable-next-line
+  },[]);
+  
+  useEffect(() => {
+    // console.log('luego deberia llamarme a mi')
     dispatch(
       recipesOrderAndFilter({
         order: currentOrderLocale.value,
@@ -31,9 +33,8 @@ export default function CardContainer() {
         filter: currentFilterLocale.value,
         field: currentFilterLocale.prop
       })
-    );
-    dispatch(getAllRecipes()); // eslint-disable-next-line
-  }, []);
+    );// eslint-disable-next-line
+  },[control])
 
   useEffect(() => {
     setCurrentOrderLocale(currentOrderState);
@@ -45,7 +46,7 @@ export default function CardContainer() {
       <div className="main_title">The International Cuisine's App</div>
       <img className="back_image" src={backImg} alt="Sirve cerveza" />
       <div className="card_container">
-        {recipesToShow.length ?
+        {recipesToShow.length > 0 ?
           recipesToShow.map((recipe) => {
             return (
               <div className="cards" key={recipe.id}>
@@ -59,7 +60,7 @@ export default function CardContainer() {
                 </Link>
               </div>
             );
-          }) : <img src={loading} alt="loading..." />
+          }) : <img className="image_loading" src={loading} alt="loading..." />
         }
       </div>
     </div>

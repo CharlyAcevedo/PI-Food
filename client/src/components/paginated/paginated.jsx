@@ -132,7 +132,7 @@ export default function Paginated() {
             <li className="btn_paginated btn_main_paginated" key={page}>
               <button
                 className={
-                  currentPage === page ? "btn_primary_active" : "btn_primary"
+                  currentPage === page ? "btn_primary_active btn_number" : "btn_primary btn_number"
                 }
                 onClick={() => pagination(page)}
                 value={page}

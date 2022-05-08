@@ -12,7 +12,7 @@ const getApiData = async () => {
     const apiRecipes = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     );
-    if (apiRecipes.status !== 200) {
+    if (apiRecipes.status > 399) {
       apiRecipes = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY_1}&addRecipeInformation=true&number=100`
       );

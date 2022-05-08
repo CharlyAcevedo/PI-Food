@@ -47,11 +47,11 @@ export default function RecipeCreateForm() {
       step: "",
     },
     cuisines: [],
-    actualCuisine: "",
+    actual_cuisines: "",
     dishTypes: [],
-    actualDishType: "",
+    actual_dishTypes: "",
     diets: [],
-    actualDiet: "",
+    actual_diets: "",
   });
 
   const [errors, setErrors] = useState({
@@ -293,9 +293,11 @@ export default function RecipeCreateForm() {
       return el !== e.target.innerText;
     });
     setNewRecipe((prevState) => {
+      let actual = 'actual_' + e.target.id
       return {
         ...prevState,
         [e.target.id]: newStateType,
+        [actual]: ""
       };
     });
     if (newStateType.length === 0) {
@@ -549,14 +551,14 @@ export default function RecipeCreateForm() {
             </div>
           </section>
           <section className="form_sections" id="section_types">
-          <label className="form_labels main_labelTypes" htmlFor="diets">Select one or more types of Diet, Cuisine or Dish yor recipe belongs to:</label>
+          <label className="form_labels main_labelTypes" htmlFor="diets">Select one or more types of Diet, Cuisine or Dish:</label>
           <br />
             <label className="form_labels label_types" htmlFor="diets">Diet:</label>
             <select
               className="input_form selector_types"
               name="diets"
               id="diets"
-              value={newRecipe.actualDiet}
+              value={newRecipe.actual_diets}
               onChange={handleOnChange}
             >
               <option value="">Select one or more Diets</option>
@@ -592,7 +594,7 @@ export default function RecipeCreateForm() {
               className="input_form  selector_types"
               name="cuisines"
               id="cuisines"
-              value={newRecipe.actualCuisine}
+              value={newRecipe.actual_cuisines}
               onChange={handleOnChange}
             >
               <option value="">Select one or more Cuisines</option>
@@ -628,7 +630,7 @@ export default function RecipeCreateForm() {
               className="input_form  selector_types"
               name="dishTypes"
               id="dishTypes"
-              value={newRecipe.actualDishType}
+              value={newRecipe.actual_dishTypes}
               onChange={handleOnChange}
             >
               <option value="">Select one or more DishTypes</option>

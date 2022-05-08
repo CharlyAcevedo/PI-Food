@@ -75,14 +75,14 @@ export default function Details() {
             <div>Healt Score: {recipeData.healthScore}</div>
             </div>
             <div className="inher_container_extras others">
-            <div>Vegetarian: {recipeData.vegetarian ? <input checked type="checkbox"/> : <input type="checkbox"/>}</div>
-            <div>Vegan: {recipeData.vegan ? <input checked type="checkbox"/> : <input type="checkbox"/>}</div>
-            <div>Gluten Free: {recipeData.glutenFree ? <input checked type="checkbox"/> : <input type="checkbox"/>}</div>
+            <div>Vegetarian: {recipeData.vegetarian ? <input readOnly checked type="checkbox"/> : <input type="checkbox"/>}</div>
+            <div>Vegan: {recipeData.vegan ? <input readOnly checked type="checkbox"/> : <input type="checkbox"/>}</div>
+            <div>Gluten Free: {recipeData.glutenFree ? <input readOnly checked type="checkbox"/> : <input type="checkbox"/>}</div>
           </div>
           </div>
         </>
       ) : (
-        <img src={ensaladaprepara} alt="loading..." />
+        <img className="image_loading" src={ensaladaprepara} alt="loading..." />
       )}
     </div>
   );

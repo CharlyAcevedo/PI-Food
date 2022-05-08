@@ -342,3 +342,102 @@
     float: left;
     padding: 0 .4em;
 }
+
+@media (max-width: 800px) {
+
+    .form_container{
+        width: 99%;
+        height: 100%;
+        padding: .2em .2em;
+        box-shadow: 2px 2px 2px #41381c;
+        border-width: 4px;
+    }
+    
+    h3{
+        font-size: .9em;
+    }
+
+    h5{
+        font-size: .7em;
+    }
+    
+    .title_create_done{
+        font-size: .7em;
+    }
+
+    #section_title{
+        position: relative;
+        float: none;
+        width: 98%;
+    }
+
+    #section_summary{
+        position: relative;
+        float: none;
+        width: 98%;
+    }
+
+    #section_inputs{
+        position: relative;
+        top: 0em;
+        float: none;
+        width: 98%;
+    }
+    
+    #section_steps{
+        position: relative;
+        float: none;
+        margin-top: 0em;
+        width: 98%;
+        height: 41vh;
+    }
+
+    #section_types{
+        position: relative;
+        float: none;
+        width: 98%;
+        height: 50vh;
+    }
+    
+    #section_checkbox{
+        position: relative;
+        float: none;
+        width: 98%;
+        margin: auto;
+    }
+
+    #section_btns{
+        position: relative;
+        float: none;
+        margin: auto;
+        width: 80%;
+        height: 7vh;
+        margin-top: .3em;
+    }
+
+    .recipe_image{
+        font-size: small;
+        text-align: center;
+    }
+
+    .label_types{
+        font-size: .9em;
+        line-height: 1.8em;
+    }
+
+    .selector_types{
+        position: relative;
+        float: none;
+        display: flex;
+        flex-direction: row;
+        line-height: 1em;
+    }
+
+    .check_container{
+        margin-left: 1em;
+    }
+
+    .errors_alert{
+        font-size: x-small;
+    }
+}

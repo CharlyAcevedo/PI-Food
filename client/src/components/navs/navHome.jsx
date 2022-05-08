@@ -5,6 +5,7 @@ import { getAllTypes, recipesOrderAndFilter, searchRecipe } from '../../redux/ac
 import corazon from "../../asets/img/corazon.gif";
 import arrow from "../../asets/icons/arrow.svg";
 import search from '../../asets/icons/search.svg';
+import menuhamburger from '../../asets/icons/menu.svg'
 import "./styles/navHome.css";
 
 export default function NavHome() {
@@ -18,9 +19,10 @@ export default function NavHome() {
   const currentFilter = useSelector(state => state.currentFilter);
 
   
-  const [currentOrderLocale, setCurrentOrderLocale] = useState('ASC');
-  const [currentOrderByLocale, setCurrentOrderByLocale] = useState('name');
+  const [currentOrderLocale, setCurrentOrderLocale] = useState("ASC");
+  const [currentOrderByLocale, setCurrentOrderByLocale] = useState("name");
   const [currentSearch, setCurrentSearch] = useState('')
+  const [control, setControl] =useState(true)
 
   useEffect(() => {
     dispatch(getAllTypes())
@@ -62,11 +64,16 @@ export default function NavHome() {
     }
   }
 
+  const handleTogle = (e) => {
+    if(control) setControl(false)
+    if(!control) setControl(true)
+  }
+
   return (
     <nav className="nav_home">
       <section className="nav_logo_container">
         <img src={corazon} alt="" className="nav_logo" />
-        <ul className="links_container">
+        <ul className={control ? "links_container" : "links_container links_container_active"}>
           <li className="nav_list">
             <Link className="nav_link" to="/home">
               Home
@@ -173,6 +180,9 @@ export default function NavHome() {
         </ul>
         <input onChange={(e) => handleChange(e)} className='nav_input' type="search" value={currentSearch}/>
         <img className='img_search' src={search} alt='search' />       
+        <div className="menu_hamburger" onClick={handleTogle}>
+          <img className="hamburger_img" src={menuhamburger} alt="menu hamburger" />
+        </div>
       </section>
     </nav>
   );

@@ -58,11 +58,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
       let recipesNormalized = initialNormalize(payload.data);
       recipesNormalized = filtersAndOrders(
         recipesNormalized,
-        state.currentFilter.prop,
-        state.currentFilter.value,
-        state.currentOrder.value,
-        state.currentOrder.prop
       );
+     
       const newPageRecipes2 = recipesNormalized.slice(0, state.currentLimit);
       return {
         ...state,
@@ -78,6 +75,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           errors: payload.error,
         };
       }
+      if (payload.filter === "all") payload.field = 'name'
       let newOrderAndFilter = filtersAndOrders(
         state.allRecipes,
         payload.field ? payload.field : state.currentFilter.prop,
@@ -85,10 +83,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         payload.order ? payload.order : state.currentOrder.value,
         payload.orderBy ? payload.orderBy : state.currentOrder.prop
       );
+      const copyOrderEndfilter = newOrderAndFilter
       const newPageRecipes1 = newOrderAndFilter.slice(0, state.currentLimit);
       return {
         ...state,
-        recipesToShow: newOrderAndFilter,
+        recipesToShow: copyOrderEndfilter,
         pageToShow: newPageRecipes1,
         currentPage: 1,
         currentOrder: {

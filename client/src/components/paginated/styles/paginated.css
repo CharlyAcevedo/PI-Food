@@ -95,3 +95,9 @@
     border-width: 2px;
     border-style: inset;
 }
+
+@media (max-width: 700px) {
+    .btn_number{
+        display: none;
+    }
+}
