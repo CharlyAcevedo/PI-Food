@@ -18,7 +18,7 @@ export default function RecipeCreateForm() {
   const allDiets = useSelector((state) => state.allDiets);
   const allCuisines = useSelector((state) => state.allCuisines);
   const allDishTypes = useSelector((state) => state.allDishTypes);
-  const created = useSelector((state) => state.created)
+  const created = useSelector((state) => state.created);
 
   let regexId = /^DBC-[0-9]/;
   const createdRecipes = allRecipes.filter((recipe) => {
@@ -61,8 +61,7 @@ export default function RecipeCreateForm() {
     healthScore: "Write a number between 1 and 100",
     image: "A valid HTML address must be entered for the image",
     step: "Step must be a sentence with at least 3 words",
-    steps:
-      "At least one step must be added",
+    steps: "At least one step must be added",
     cuisines: "At least one type of cuisine must be selected",
     dishTypes: "At least one type of dish type must be selected",
     diets: "At least one type of diet must be selected",
@@ -97,8 +96,7 @@ export default function RecipeCreateForm() {
           setErrors((prevState) => {
             return {
               ...prevState,
-              [e.target.name]:
-                "Write a sentence with a minimum of three words",
+              [e.target.name]: "Write a sentence with a minimum of three words",
             };
           });
           break;
@@ -131,8 +129,7 @@ export default function RecipeCreateForm() {
           setErrors((prevState) => {
             return {
               ...prevState,
-              [e.target.name]:
-                "At least one step must be added",
+              [e.target.name]: "At least one step must be added",
             };
           });
           break;
@@ -281,8 +278,7 @@ export default function RecipeCreateForm() {
       setErrors((prevState) => {
         return {
           ...prevState,
-          steps:
-            "At least one step must be added",
+          steps: "At least one step must be added",
         };
       });
     }
@@ -293,11 +289,11 @@ export default function RecipeCreateForm() {
       return el !== e.target.innerText;
     });
     setNewRecipe((prevState) => {
-      let actual = 'actual_' + e.target.id
+      let actual = "actual_" + e.target.id;
       return {
         ...prevState,
         [e.target.id]: newStateType,
-        [actual]: ""
+        [actual]: "",
       };
     });
     if (newStateType.length === 0) {
@@ -319,8 +315,7 @@ export default function RecipeCreateForm() {
       healthScore: "You must write a number between 1 and 100",
       image: "A valid HTML address must be entered for the image",
       step: "Step must be a sentence with at least 3 words",
-      steps:
-        "At least one step must be added",
+      steps: "At least one step must be added",
       cuisines: "At least one type of cuisine must be selected",
       dishTypes: "At least one type of dish type must be selected",
       diets: "At least one type of diet must be selected",
@@ -379,11 +374,14 @@ export default function RecipeCreateForm() {
             Here you can create your own recipe, please check the instructions
             for each field
           </h3>
-          { created.length > 0 ? <h5  className="title_create_done">{created}</h5> :
+          {created.length > 0 ? (
+            <h5 className="title_create_done">{created}</h5>
+          ) : (
             <h5 className="title_create_inside">
-            When all the fields are correct you can send us your recipe to be
-            added to the database
-          </h5>}
+              When all the fields are correct you can send us your recipe to be
+              added to the database
+            </h5>
+          )}
         </section>
         <form action="#">
           <section className="form_sections" id="section_title">
@@ -499,8 +497,13 @@ export default function RecipeCreateForm() {
             </div>
           </section>
           <section className="form_sections" id="section_steps">
-            <label className="form_labels label_steps" id="label_steps" htmlFor="step">
-              Write here each of the steps to complete your recipe,<br /> then click Add Step button for each step:
+            <label
+              className="form_labels label_steps"
+              id="label_steps"
+              htmlFor="step"
+            >
+              Write here each of the steps to complete your recipe,
+              <br /> then click Add Step button for each step:
             </label>
             <br />
             <input
@@ -539,7 +542,11 @@ export default function RecipeCreateForm() {
                   return (
                     <div className="added_step" key={step.number}>
                       {step.number}.- {step.step}{" "}
-                      <button className="btn_form" name={step.number} onClick={handleDeleteStep}>
+                      <button
+                        className="btn_form"
+                        name={step.number}
+                        onClick={handleDeleteStep}
+                      >
                         Delete
                       </button>
                     </div>
@@ -551,9 +558,13 @@ export default function RecipeCreateForm() {
             </div>
           </section>
           <section className="form_sections" id="section_types">
-          <label className="form_labels main_labelTypes" htmlFor="diets">Select one or more types of Diet, Cuisine or Dish:</label>
-          <br />
-            <label className="form_labels label_types" htmlFor="diets">Diet:</label>
+            <label className="form_labels main_labelTypes" htmlFor="diets">
+              Select one or more types of Diet, Cuisine or Dish:
+            </label>
+            <br />
+            <label className="form_labels label_types" htmlFor="diets">
+              Diet:
+            </label>
             <select
               className="input_form selector_types"
               name="diets"
@@ -586,10 +597,14 @@ export default function RecipeCreateForm() {
                   );
                 })
               ) : (
-                <div className="errors_alert errors_typesAlert">{errors.diets}</div>
+                <div className="errors_alert errors_typesAlert">
+                  {errors.diets}
+                </div>
               )}
             </div>
-            <label className="form_labels label_types" htmlFor="cuisines">Cuisine:</label>
+            <label className="form_labels label_types" htmlFor="cuisines">
+              Cuisine:
+            </label>
             <select
               className="input_form  selector_types"
               name="cuisines"
@@ -607,11 +622,11 @@ export default function RecipeCreateForm() {
                   );
                 })}
             </select>
-            <div  className="types_container">
+            <div className="types_container">
               {newRecipe.cuisines.length > 0 ? (
                 newRecipe.cuisines.map((cuisine) => {
                   return (
-                    <div 
+                    <div
                       className="types_inside"
                       key={cuisine}
                       id="cuisines"
@@ -622,10 +637,14 @@ export default function RecipeCreateForm() {
                   );
                 })
               ) : (
-                <div className="errors_alert errors_typesAlert">{errors.cuisines}</div>
+                <div className="errors_alert errors_typesAlert">
+                  {errors.cuisines}
+                </div>
               )}
             </div>
-            <label className="form_labels label_types" htmlFor="dishTypes">Dish:</label>
+            <label className="form_labels label_types" htmlFor="dishTypes">
+              Dish:
+            </label>
             <select
               className="input_form  selector_types"
               name="dishTypes"
@@ -643,7 +662,7 @@ export default function RecipeCreateForm() {
                   );
                 })}
             </select>
-            <div  className="types_container">
+            <div className="types_container">
               {newRecipe.dishTypes.length > 0 ? (
                 newRecipe.dishTypes.map((dishType) => {
                   return (
@@ -658,41 +677,45 @@ export default function RecipeCreateForm() {
                   );
                 })
               ) : (
-                <div className="errors_alert errors_typesAlert">{errors.dishTypes}</div>
+                <div className="errors_alert errors_typesAlert">
+                  {errors.dishTypes}
+                </div>
               )}
             </div>
-            <div className="types_footer">To unselect a type just Double Click on it</div>
+            <div className="types_footer">
+              To unselect a type just Double Click on it
+            </div>
           </section>
           <section className="form_sections" id="section_checkbox">
             <div className="check_container">
-            <label htmlFor="vegetarian">Vegetarian:</label>
-            <input
-              className="check_form"
-              type="checkbox"
-              name="vegetarian" //vegetarian
-              checked={newRecipe.vegetarian}
-              onChange={handleOnChange}
-            />
+              <label htmlFor="vegetarian">Vegetarian:</label>
+              <input
+                className="check_form"
+                type="checkbox"
+                name="vegetarian" //vegetarian
+                checked={newRecipe.vegetarian}
+                onChange={handleOnChange}
+              />
             </div>
             <div className="check_container">
-            <label htmlFor="vegan">Vegan:</label>
-            <input
-              className="check_form"
-              type="checkbox"
-              name="vegan" //vegan
-              checked={newRecipe.vegan}
-              onChange={handleOnChange}
-            />
+              <label htmlFor="vegan">Vegan:</label>
+              <input
+                className="check_form"
+                type="checkbox"
+                name="vegan" //vegan
+                checked={newRecipe.vegan}
+                onChange={handleOnChange}
+              />
             </div>
             <div className="check_container">
-            <label htmlFor="glutenFree">Gluten Free</label>
-            <input
-              className="check_form"
-              type="checkbox"
-              name="glutenFree" //glutenFree
-              checked={newRecipe.glutenFree}
-              onChange={handleOnChange}
-            />
+              <label htmlFor="glutenFree">Gluten Free</label>
+              <input
+                className="check_form"
+                type="checkbox"
+                name="glutenFree" //glutenFree
+                checked={newRecipe.glutenFree}
+                onChange={handleOnChange}
+              />
             </div>
           </section>
           <section className="form_sections" id="section_btns">

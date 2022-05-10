@@ -58,6 +58,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       let recipesNormalized = initialNormalize(payload.data);
       recipesNormalized = filtersAndOrders(
         recipesNormalized,
+        "name",
+        "all",
+        "ASC",
+        "name"
       );
      
       const newPageRecipes2 = recipesNormalized.slice(0, state.currentLimit);
@@ -75,14 +79,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
           errors: payload.error,
         };
       }
-      if (payload.filter === "all") payload.field = 'name'
+      // if (payload.filter === "all") payload.field = 'name'
       let newOrderAndFilter = filtersAndOrders(
         state.allRecipes,
         payload.field ? payload.field : state.currentFilter.prop,
         payload.filter ? payload.filter : state.currentFilter.value,
         payload.order ? payload.order : state.currentOrder.value,
         payload.orderBy ? payload.orderBy : state.currentOrder.prop
-      );
+        );
       const copyOrderEndfilter = newOrderAndFilter
       const newPageRecipes1 = newOrderAndFilter.slice(0, state.currentLimit);
       return {

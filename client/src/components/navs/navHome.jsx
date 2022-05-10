@@ -37,6 +37,7 @@ export default function NavHome() {
       setCurrentOrderLocale(e.target.value)
       dispatch(recipesOrderAndFilter(payload));
     } else if(e.target.name === 'orderBy'){
+      // console.log(e.target.value)
       let payload = {
         order: currentOrderLocale,
         orderBy: e.target.value
@@ -173,6 +174,19 @@ export default function NavHome() {
                       )
                     })
                   }
+                </select>
+              </li>
+              <li className="nav_link list_inside">
+                Created:
+                <select
+                  onChange={(e) => handleFilter(e)}
+                  className="select_nav"
+                  name="dbCreated"
+                  value={currentFilter.prop === 'dbCreated' ? currentFilter.value : 'all'}
+                >
+                  <option value='all'>All Recipes</option>
+                  <option value={false} >API</option>
+                  <option value={true}>by User</option>                  
                 </select>
               </li>
             </ul>
