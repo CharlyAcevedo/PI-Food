@@ -1,15 +1,20 @@
+
+
 .recipe_card{
     width: 98%;
-    height: 35vh;
+    height: 36vh;
     background-color: #faebd7;    
     background: linear-gradient(45deg, #e9d8c3ed 0%, #dfd9cd 44%, #e9d8c3ed 100%);
-    padding: .5em 0em;
+    padding: .3em 0em;
     text-decoration: none;
     text-shadow: 1px 1px 1px #41381c;
     overflow: scroll;
     border-radius: 15px;
     box-shadow: 4px 4px 2px #41381cc4;
+    border-width: 4px;
+    border-style:outset;
     transition: transform 0.5s;
+    
 }
 
 .recipe_card:hover{ 

@@ -217,3 +217,13 @@
     }
 
 }
+
+@media (max-width: 380px) {
+    .nav_input:hover{
+        width: 40%;
+    }
+    
+    .nav_input:focus{
+        width: 40%;
+    }
+}
