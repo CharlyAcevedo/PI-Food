@@ -82,6 +82,32 @@ const createRecipe = async ({
   return response;
 };
 
+const deleteRecipe = async (id) => {
+  let response = {
+    status: 200,
+    msg: "Recipe has been deleted successfully!!! ;)",
+  };
+  console.log(id)
+  if (typeof id !== "string" || id.slice(0, 3) !== "DBC") {
+    response.status = 404;
+    response.msg = "Id is not valid, recipe has not been deleted";
+    return response;
+  }
+
+  let recipeToDelete = await Recipe.destroy({
+    where: { id : id }
+  })
+  if(recipeToDelete === 1){
+    return response
+  } else {
+    response.status = 404;
+    response.msg = "Recipe not found";
+    return response;
+  }
+
+}
+
 module.exports = {
-  createRecipe
+  createRecipe,
+  deleteRecipe
 }

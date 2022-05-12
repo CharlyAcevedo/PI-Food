@@ -9,6 +9,7 @@ import {
   GET_RECIPE_DETAILS,
   CREATE_RECIPE,
   SET_CURRENT_LIMIT,
+  DELETE_RECIPE,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   currentLimit: 9,
   currentPage: 1,
   created: "",
+  deleted: "",
   errors: "",
 };
 
@@ -197,6 +199,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         created: payload.data
+      }
+    case DELETE_RECIPE:
+      if(payload.error) {
+        return {
+          ...state,
+          errors: payload.error,
+        };
+      };
+      return {
+        ...state,
+        deleted: payload.data
       }
     default:
       return state;

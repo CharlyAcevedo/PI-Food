@@ -9,6 +9,7 @@ import {
   GET_RECIPE_DETAILS,
   CREATE_RECIPE,
   SET_CURRENT_LIMIT,
+  DELETE_RECIPE,
 } from "./actionTypes";
 
 export function getAllTypes() {
@@ -160,3 +161,20 @@ export function createRecipe(payload){
   };
 };
 
+export function deleteRecipe(payload){
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/recipe/delete/${payload}`).then((response) => {
+        dispatch({
+          type: DELETE_RECIPE,
+          payload: response
+        })
+      })
+    } catch (error) {
+      dispatch({
+        type: DELETE_RECIPE,
+        payload: { error: error.message }
+      })
+    }
+  }
+}

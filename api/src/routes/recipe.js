@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createRecipe } = require("../controlers/recipe");
+const { createRecipe, deleteRecipe } = require("../controlers/recipe");
 const { Recipe, Diet, Cuisine, DishType } = require("../db");
 
 const router = Router();
@@ -23,9 +23,7 @@ router.post("/", async (req, res) => {
   } = req.body;
 
   const findEqual = await Recipe.findByPk(id)
-  console.log(findEqual)
   if (findEqual) {
-    console.log('entro aqui')
     res.status(400).send('That ID allready exist in DB')
     return;
   };
@@ -47,5 +45,17 @@ router.post("/", async (req, res) => {
   });
   res.status(response.status).send(response.msg);
 });
+
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  
+  const findIdToDelet = await Recipe.findByPk(id)
+  if (findIdToDelet) {
+    const response = await deleteRecipe(id)
+    res.status(response.status).send(response.msg)
+  } else {
+    res.status(400).send("Recipe can not be found in Data base")
+  }
+})
 
 module.exports = router;

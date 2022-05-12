@@ -1,11 +1,31 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom'
 import ensaladaprepara from '../../asets/img/ensaladaprepara.gif'
 import batehuevo from "../../asets/img/batehuevo.gif";
+import { deleteRecipe } from "../../redux/actions";
 import "./styles/details.css";
 
 export default function Details() {
+
+  const dispatch = useDispatch()
+
+  const history = useHistory()
+
+
   const recipeData = useSelector((state) => state.recipeDetails);
+
+  let checkCreated = false;
+  if(typeof recipeData.id === 'string' && recipeData.id.slice(0,3) === "DBC") checkCreated = true
+  
+  function handleOnClick(e){
+    e.preventDefault()
+    let doubleCheck = window.confirm("Do you really want to delete this recipe?")
+    if(doubleCheck){
+      dispatch(deleteRecipe(recipeData.id))
+      history.push('/home')
+    }
+  }
 
   return (
     <div className="main_container">
@@ -14,6 +34,7 @@ export default function Details() {
         <>
           <img className="main_image" src={recipeData.image} alt="The Recipe" />
           <h1 className="main_title_details">{recipeData.name}</h1>
+          {checkCreated ? <button onClick={handleOnClick} className="btn_delete">Delete Recipe</button> : <></>}
           <div className="symary_container">
             <h3>Sumary</h3>
             <p

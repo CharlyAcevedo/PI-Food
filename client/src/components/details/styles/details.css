@@ -31,7 +31,7 @@
     float: right;
     width: 58%;
     height: 7vh;
-    margin-top: 1em;
+    margin-top: 1.5em;
     margin-right: 1em;
     color: #41381c;
     font-family: 'Ms Madi', cursive;
@@ -46,11 +46,35 @@
     transition: transform 0.5s;
 }
 
+.btn_delete{
+    position: absolute;
+    right: 35%;
+    top: 3.5em;
+    height: 4vh;
+    width:fit-content;
+    padding: 0 .5em;
+    font-weight: 500;
+    background-color: #ce7044;
+    border-radius: 10px;
+    border: none;
+    border-style: outset;
+    border-width: 2px;
+}
+
+.btn_delete:hover{
+    background-color: #8b4b2e;    
+    border-width: 3px;
+}
+
+.btn_delete:active{
+    border-style: inset;    
+}
+
 .symary_container{
     position: relative;
     float:right;
     width: 60%;
-    height: 35vh;
+    height: 32vh;
     margin-right: 1em;
     text-shadow: 1px 1px 1px #41381c;
     background-color: #faebd7bd;
@@ -200,7 +224,7 @@
         margin-left: .2em;
         margin-bottom: 0;
     }
-    
+
     .symary_container{
         position: relative;
         float:none;
